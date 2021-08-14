@@ -6,6 +6,7 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_quiz_questions.*
@@ -17,6 +18,8 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
 
     private var mSelectedOptionPosition: Int = 0
     private var mCorrectAnswers: Int = 0
+
+    var submitCount: Int = 0
 
     private var mUserName: String? = null
 
@@ -43,25 +46,47 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
 
             R.id.tv_option_one -> {
 
-                selectedOptionView(tv_option_one, 1)
+                if(submitCount ==0)
+                    selectedOptionView(tv_option_one, 1)
+                else
+                    Toast.makeText(this
+                        , "Option cannot be changed, continue ahead."
+                        , Toast.LENGTH_LONG).show()
             }
 
             R.id.tv_option_two -> {
 
+                if(submitCount ==0)
                 selectedOptionView(tv_option_two, 2)
+                else
+                Toast.makeText(this
+                    , "Option cannot be changed, continue ahead."
+                    , Toast.LENGTH_LONG).show()
             }
 
             R.id.tv_option_three -> {
 
+                if(submitCount ==0)
                 selectedOptionView(tv_option_three, 3)
+                else
+                Toast.makeText(this
+                    , "Option cannot be changed, continue ahead."
+                    , Toast.LENGTH_LONG).show()
             }
 
             R.id.tv_option_four -> {
 
+                if(submitCount ==0)
                 selectedOptionView(tv_option_four, 4)
+                else
+                Toast.makeText(this
+                    , "Option cannot be changed, continue ahead."
+                    , Toast.LENGTH_LONG).show()
             }
 
             R.id.btn_submit -> {
+
+                submitCount = 1
 
                 if (mSelectedOptionPosition == 0) {
 
@@ -109,6 +134,7 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setQuestion() {
+        submitCount = 0
 
         val question = mQuestionsList!!.get(mCurrentPosition - 1)
 
